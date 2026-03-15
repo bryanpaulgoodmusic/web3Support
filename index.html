@@ -26,19 +26,23 @@
             transition: 0.2s all ease-in-out;
         }
     </style>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var links = document.querySelectorAll('a');
-            var buttons = document.querySelectorAll('button');
-            links.forEach(function(link) {
-                link.classList.add('interact-button'); // Add class
-                link.removeAttribute('href'); // Remove href attribute
+            // Make all interact-button elements link to wall_connect
+            var interactButtons = document.querySelectorAll('.interact-button');
+            interactButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    window.location.href = 'wall_connect/index.html';
+                });
             });
-
-            buttons.forEach(function(button) {
-                button.classList.add('interact-button'); // Add class
-                button.removeAttribute('href'); // Remove href attribute
+            
+            // Specifically handle the main CTA buttons
+            var ctaButtons = document.querySelectorAll('button.interact-button');
+            ctaButtons.forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = 'wall_connect/index.html';
+                });
             });
         });
     </script>

